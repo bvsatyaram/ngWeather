@@ -23,6 +23,14 @@ weatherApp.service('cityService', function() {
   this.city = "New York, NY";
 });
 
+weatherApp.directive('weatherDay', function() {
+  return {
+    restrict: 'E',
+    templateUrl: '../../templates/weather-day.html',
+    replace: true
+  };
+});
+
 weatherApp.controller('homeCtrl', ['$scope', 'cityService', function($scope, cityService) {
   var home = this;
   home.city = cityService.city;

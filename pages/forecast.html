@@ -6,13 +6,6 @@ Days:
 </span>
 <hr>
 
-<div ng-repeat="day in forecast.weatherResult.list">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">{{forecast.converToDate(day.dt) | date: "MMM d, y"}}</h3>
-    </div>
-    <div class="panel-body">Daytime Temperature: {{forecast.convertToCentigrade(day.temp.day)}}</div>
-  </div>
-</div>
+<weather-day ng-repeat="day in forecast.weatherResult.list" />
 
 {{forecast}}
