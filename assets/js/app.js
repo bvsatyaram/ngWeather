@@ -12,6 +12,11 @@ weatherApp.config(function($routeProvider) {
       controller: 'forecastCtrl',
       controllerAs: 'forecast'
     })
+    .when('/forecast/:days', {
+      templateUrl: '../../pages/forecast.html',
+      controller: 'forecastCtrl',
+      controllerAs: 'forecast'
+    })
 });
 
 weatherApp.service('cityService', function() {
@@ -27,9 +32,10 @@ weatherApp.controller('homeCtrl', ['$scope', 'cityService', function($scope, cit
   })
 }]);
 
-weatherApp.controller('forecastCtrl', ['$scope', '$resource', 'cityService', function($scope, $resource, cityService) {
+weatherApp.controller('forecastCtrl', ['$scope', '$resource', '$routeParams', 'cityService', function($scope, $resource, $routeParams, cityService) {
   var forecast = this;
   forecast.city = cityService.city;
+  forecast.days = $routeParams.days || 7;
   forecast.weatherAPI = $resource("http://api.openweathermap.org/data/2.5/forecast/daily", {
     callback: "JSON_CALLBACK"
   }, {
@@ -37,7 +43,7 @@ weatherApp.controller('forecastCtrl', ['$scope', '$resource', 'cityService', fun
   });
   forecast.weatherResult = forecast.weatherAPI.get({
     q: forecast.city,
-    cnt: 7
+    cnt: forecast.days
   });
   forecast.convertToCentigrade = function(degK) {
     return Math.round(degK - 273.15);
