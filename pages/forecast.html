@@ -1,1 +1,12 @@
 <h1>Forecast of {{forecast.city}}</h1>
+
+<div ng-repeat="day in forecast.weatherResult.list">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">{{day.dt}}</h3>
+    </div>
+    <div class="panel-body">Daytime Temperature: {{day.temp.day}}</div>
+  </div>
+</div>
+
+{{forecast}}

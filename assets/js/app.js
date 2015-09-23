@@ -27,7 +27,16 @@ weatherApp.controller('homeCtrl', ['$scope', 'cityService', function($scope, cit
   })
 }]);
 
-weatherApp.controller('forecastCtrl', ['$scope', 'cityService', function($scope, cityService) {
+weatherApp.controller('forecastCtrl', ['$scope', '$resource', 'cityService', function($scope, $resource, cityService) {
   var forecast = this;
   forecast.city = cityService.city;
+  forecast.weatherAPI = $resource("http://api.openweathermap.org/data/2.5/forecast/daily", {
+    callback: "JSON_CALLBACK"
+  }, {
+    get: {method: "JSONP"}
+  });
+  forecast.weatherResult = forecast.weatherAPI.get({
+    q: forecast.city,
+    cnt: 7
+  });
 }]);
