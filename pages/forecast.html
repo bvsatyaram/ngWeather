@@ -1,4 +1,10 @@
 <h1>Forecast of {{forecast.city}}</h1>
+<hr>
+Days: 
+<span ng-repeat="dayOption in forecast.daysOptions">
+  <span ng-hide="$first">| </span> <a href="#/forecast/{{dayOption}}" ng-class="{'bg-primary': (dayOption == forecast.days)}">{{dayOption}}</a>
+</span>
+<hr>
 
 <div ng-repeat="day in forecast.weatherResult.list">
   <div class="panel panel-default">

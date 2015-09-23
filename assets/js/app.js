@@ -35,7 +35,8 @@ weatherApp.controller('homeCtrl', ['$scope', 'cityService', function($scope, cit
 weatherApp.controller('forecastCtrl', ['$scope', '$resource', '$routeParams', 'cityService', function($scope, $resource, $routeParams, cityService) {
   var forecast = this;
   forecast.city = cityService.city;
-  forecast.days = $routeParams.days || 7;
+  forecast.daysOptions = [2, 4, 5, 7];
+  forecast.days = $routeParams.days || forecast.daysOptions[0];
   forecast.weatherAPI = $resource("http://api.openweathermap.org/data/2.5/forecast/daily", {
     callback: "JSON_CALLBACK"
   }, {
