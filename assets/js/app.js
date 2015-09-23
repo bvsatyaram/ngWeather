@@ -4,18 +4,30 @@ weatherApp.config(function($routeProvider) {
   $routeProvider
     .when('/', {
       templateUrl: '../../pages/home.html',
-      controller: 'homeCtrl'
+      controller: 'homeCtrl',
+      controllerAs: 'home'
     })
     .when('/forecast', {
       templateUrl: '../../pages/forecast.html',
-      controller: 'forecastCtrl'
+      controller: 'forecastCtrl',
+      controllerAs: 'forecast'
     })
 });
 
-weatherApp.controller('homeCtrl', ['$scope', function($scope) {
-  main = self;
+weatherApp.service('cityService', function() {
+  this.city = "New York, NY";
+});
+
+weatherApp.controller('homeCtrl', ['$scope', 'cityService', function($scope, cityService) {
+  var home = this;
+  home.city = cityService.city;
+
+  $scope.$watch('home.city', function() {
+    cityService.city = home.city;
+  })
 }]);
 
-weatherApp.controller('forecastCtrl', ['$scope', function($scope) {
-  forecast = self;
-}])
+weatherApp.controller('forecastCtrl', ['$scope', 'cityService', function($scope, cityService) {
+  var forecast = this;
+  forecast.city = cityService.city;
+}]);
