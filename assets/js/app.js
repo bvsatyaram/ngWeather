@@ -39,4 +39,10 @@ weatherApp.controller('forecastCtrl', ['$scope', '$resource', 'cityService', fun
     q: forecast.city,
     cnt: 7
   });
+  forecast.convertToCentigrade = function(degK) {
+    return Math.round(degK - 273.15);
+  };
+  forecast.converToDate = function(timeStamp) {
+    return new Date(timeStamp*1000);
+  };
 }]);
