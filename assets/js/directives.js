@@ -1,7 +1,7 @@
 weatherApp.directive('weatherDay', function() {
   return {
     restrict: 'E',
-    templateUrl: '../../templates/weather-day.html',
+    templateUrl: 'templates/weather-day.html',
     replace: true
   };
 });
